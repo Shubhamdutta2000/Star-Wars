@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import People from "./components/People";
 import Planets from "./components/Planets";
 
+import "./styles/styles.css";
+
 function App() {
   const [page, setPage] = useState("planets");
 
