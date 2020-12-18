@@ -1,4 +1,4 @@
 @import "./utils/common.css";
 @import "./components/Navbar.css";
-@import "./components/People.css";
-@import "./components/Planets.css";
+@import "./components/Film.css";
+@import "./components/Planet.css";
