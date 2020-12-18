@@ -1,9 +1,11 @@
 import React from "react";
 
-export const Planets = () => {
+const Planets = () => {
   return (
     <>
       <h2>Planets</h2>
     </>
   );
 };
+
+export default Planets;
