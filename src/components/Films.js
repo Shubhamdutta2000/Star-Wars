@@ -3,12 +3,16 @@ import { useQuery } from "react-query";
 
 import Film from "./Film";
 
+////////////  async function of fetching data of films from api  //////////
+
 const fetchFilms = async () => {
   const res = await fetch("https://swapi.dev/api/films/");
   return res.json();
 };
 
 const Films = () => {
+  //////////////   useQuery to get data of films asynchronously by providing config (like: staleTime and cacheTime)  ////////////
+
   const { data, status } = useQuery("films", fetchFilms, {
     staleTime: 0,
     cacheTime: 10,

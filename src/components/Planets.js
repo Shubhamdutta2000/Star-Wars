@@ -3,12 +3,16 @@ import { useQuery } from "react-query";
 
 import Planet from "./Planet";
 
+////////////  async function of fetching data of planets from api  //////////
+
 const fetchPlanets = async () => {
   const res = await fetch("https://swapi.dev/api/planets/");
   return res.json();
 };
 
 const Planets = () => {
+  //////////////   useQuery to get data of planets asynchronously by providing config (like: staleTime and cacheTime)  ////////////
+
   const { data, status } = useQuery("planets", fetchPlanets, {
     staleTime: 0,
     cacheTime: 10,

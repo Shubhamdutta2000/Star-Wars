@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import { ReactQueryDevtools } from "react-query/devtools";
 
-import Navbar from "./components/Navbar";
-import Films from "./components/Films";
-import Planets from "./components/Planets";
+import Home from "./components/Home";
 
 //@ staleTime: fetching time to keep fetched data fresh
 //           - It will refetch to see if there any updated data
@@ -32,17 +30,9 @@ queryClient.setDefaultOptions({
 });
 
 function App() {
-  const [page, setPage] = useState("planets");
-
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="App">
-        <h1>STAR WARS</h1>
-        <Navbar setPage={setPage} />
-        <div className="content">
-          {page === "planets" ? <Planets /> : <Films />}
-        </div>
-      </div>
+      <Home />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
