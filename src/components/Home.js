@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Films from "./Films";
 import Planets from "./Planets";
+import People from "./People";
 
 const Home = () => {
   const [page, setPage] = useState("planets");
@@ -13,7 +14,13 @@ const Home = () => {
         <h1>STAR WARS</h1>
         <Navbar setPage={setPage} />
         <div className="content">
-          {page === "planets" ? <Planets /> : <Films />}
+          {page === "planets" ? (
+            <Planets />
+          ) : page === "people" ? (
+            <People />
+          ) : (
+            <Films />
+          )}
         </div>
       </div>
     </div>
