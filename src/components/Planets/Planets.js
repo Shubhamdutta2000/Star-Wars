@@ -22,8 +22,6 @@ const Planets = () => {
     () => fetchPlanets(page),
     { keepPreviousData: true },
     {
-      staleTime: 0,
-      cacheTime: 10,
       onSuccess: () => console.log("Planets Data feched successfully"),
       onError: () => console.log("Error while fetching data of Planets"),
     }
@@ -39,23 +37,28 @@ const Planets = () => {
         <div> Error fetching data</div>
       ) : status === "success" ? (
         <div>
-          <button
-            onClick={() => setPage((old) => Math.min(old - 1, old))}
-            disabled={page == 1}
-          >
-            Previous
-          </button>
-          <span>{page}</span>
-          <button
-            onClick={() => {
-              if (!isPreviousData) {
-                setPage((old) => old + 1);
-              }
-            }}
-            disabled={!data.next}
-          >
-            Next
-          </button>
+          <div className="pagination">
+            <button
+              className="pagination__prev"
+              onClick={() => setPage((old) => Math.min(old - 1, old))}
+              disabled={page == 1}
+            >
+              Previous
+            </button>
+            <span>{page}</span>
+            <button
+              className="pagination__next"
+              onClick={() => {
+                if (!isPreviousData) {
+                  setPage((old) => old + 1);
+                }
+              }}
+              disabled={!data.next}
+            >
+              Next
+            </button>
+          </div>
+
           {data.results.map((planet) => (
             <Planet key={planet.name} planet={planet} />
           ))}

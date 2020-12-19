@@ -22,8 +22,6 @@ const Starships = () => {
     () => fetchStarships(page),
     { keepPreviousData: true },
     {
-      staleTime: 0,
-      cacheTime: 10,
       onSuccess: () => console.log("Starships Data feched successfully"),
       onError: () => console.log("Error while fetching data of Starships"),
     }
@@ -39,26 +37,32 @@ const Starships = () => {
         <div> Error fetching data</div>
       ) : status === "success" ? (
         <div>
-          <button
-            onClick={() => setPage((old) => Math.min(old - 1, old))}
-            disabled={page == 1}
-          >
-            Previous
-          </button>
-          <span>{page}</span>
-          <button
-            onClick={() => {
-              if (!isPreviousData) {
-                setPage((old) => old + 1);
-              }
-            }}
-            disabled={!data.next}
-          >
-            Next
-          </button>
-          {data.results.map((starship) => (
-            <Starship key={starship.name} starship={starship} />
-          ))}
+          <div>
+            <div className="pagination">
+              <button
+                className="pagination__left"
+                onClick={() => setPage((old) => Math.min(old - 1, old))}
+                disabled={page == 1}
+              >
+                Previous
+              </button>
+              <span>{page}</span>
+              <button
+                className="pagination__right"
+                onClick={() => {
+                  if (!isPreviousData) {
+                    setPage((old) => old + 1);
+                  }
+                }}
+                disabled={!data.next}
+              >
+                Next
+              </button>
+            </div>
+            {data.results.map((starship) => (
+              <Starship key={starship.name} starship={starship} />
+            ))}
+          </div>
         </div>
       ) : null}
     </>

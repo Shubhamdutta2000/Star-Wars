@@ -12,3 +12,15 @@
   margin: 10px 0;
   color: #ffff57;
 }
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.pagination span {
+  font-size: larger;
+  margin-top: auto;
+  margin-bottom: auto;
+}
