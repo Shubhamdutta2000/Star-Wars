@@ -3,6 +3,8 @@ import { useQuery } from "react-query";
 
 import Starship from "./Starship";
 
+import Loader from "../Loader";
+
 ////////////  async function of fetching data of starships from api  //////////
 
 const fetchStarships = async (page) => {
@@ -15,15 +17,7 @@ const Starships = () => {
 
   //////////////   useQuery to get data of starships asynchronously by providing config (like: staleTime and cacheTime)  ////////////
 
-  const {
-    isLoading,
-    isError,
-    error,
-    data,
-    isFetching,
-    status,
-    isPreviousData,
-  } = useQuery(
+  const { data, status, isPreviousData } = useQuery(
     ["starships", page],
     () => fetchStarships(page),
     { keepPreviousData: true },
@@ -40,7 +34,7 @@ const Starships = () => {
       <h2>Starships</h2>
 
       {status === "loading" ? (
-        <div>loading....</div>
+        <Loader />
       ) : status === "error" ? (
         <div> Error fetching data</div>
       ) : status === "success" ? (

@@ -5,6 +5,9 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import Home from "./components/Home";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/styles.css";
+
 //@ staleTime: fetching time to keep fetched data fresh
 //           - It will refetch to see if there any updated data
 //             that will render to the dom and keep it fresh
@@ -15,8 +18,6 @@ import Home from "./components/Home";
 //              back again it will use cached data and
 //              it will really quick to load for cache time
 //              (default: 300,000 ms)
-
-import "./styles/styles.css";
 
 const queryClient = new QueryClient();
 

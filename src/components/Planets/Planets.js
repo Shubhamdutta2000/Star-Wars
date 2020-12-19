@@ -3,6 +3,8 @@ import { useQuery } from "react-query";
 
 import Planet from "./Planet";
 
+import Loader from "../Loader";
+
 ////////////  async function of fetching data of planets from api  //////////
 
 const fetchPlanets = async (page) => {
@@ -15,15 +17,7 @@ const Planets = () => {
 
   //////////////   useQuery to get data of planets asynchronously by providing config (like: staleTime and cacheTime)  ////////////
 
-  const {
-    isLoading,
-    isError,
-    error,
-    data,
-    isFetching,
-    status,
-    isPreviousData,
-  } = useQuery(
+  const { data, status, isPreviousData } = useQuery(
     ["planets", page],
     () => fetchPlanets(page),
     { keepPreviousData: true },
@@ -40,7 +34,7 @@ const Planets = () => {
       <h2>Planets</h2>
 
       {status === "loading" ? (
-        <div>loading....</div>
+        <Loader />
       ) : status === "error" ? (
         <div> Error fetching data</div>
       ) : status === "success" ? (

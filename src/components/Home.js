@@ -26,7 +26,7 @@ const Home = () => {
           )}
         </div>
 
-        <div className="footer">Made with love by Shubham Dutta</div>
+        <div className="footer">Made with ♥ by Shubham Dutta</div>
       </div>
     </>
   );
