@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Films from "./Films";
 import Planets from "./Planets";
 import People from "./People";
+import Starships from "./Starships";
 
 const Home = () => {
   const [page, setPage] = useState("planets");
@@ -18,6 +19,8 @@ const Home = () => {
             <Planets />
           ) : page === "people" ? (
             <People />
+          ) : page === "starships" ? (
+            <Starships />
           ) : (
             <Films />
           )}
