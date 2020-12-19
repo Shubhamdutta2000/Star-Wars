@@ -12,3 +12,8 @@ button:hover {
   color: rgb(243, 137, 51);
   border-color: rgb(251, 255, 43);
 }
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

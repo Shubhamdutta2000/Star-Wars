@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
 import Navbar from "./Navbar";
-import Films from "./Films";
-import Planets from "./Planets";
-import People from "./People";
-import Starships from "./Starships";
+import Films from "./Films/Films";
+import Planets from "./Planets/Planets";
+import People from "./People/People";
+import Starships from "./Starships/Starships";
 
 const Home = () => {
   const [page, setPage] = useState("planets");
 
   return (
-    <div>
+    <>
       <div className="App">
         <h1>STAR WARS</h1>
         <Navbar setPage={setPage} />
@@ -25,8 +25,10 @@ const Home = () => {
             <Films />
           )}
         </div>
+
+        <div className="footer">Made with love by Shubham Dutta</div>
       </div>
-    </div>
+    </>
   );
 };
 

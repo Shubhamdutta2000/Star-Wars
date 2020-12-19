@@ -39,10 +39,6 @@ const Planets = () => {
     <>
       <h2>Planets</h2>
 
-      {/* <button onClick={() => setPage(1)}>Page 1</button>
-      <button onClick={() => setPage(2)}>Page 2</button>
-      <button onClick={() => setPage(3)}>Page 3</button> */}
-
       {status === "loading" ? (
         <div>loading....</div>
       ) : status === "error" ? (
