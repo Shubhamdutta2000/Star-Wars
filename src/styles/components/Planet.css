@@ -12,3 +12,8 @@
   margin: 10px 0;
   color: #ffff57;
 }
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

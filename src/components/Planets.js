@@ -15,9 +15,18 @@ const Planets = () => {
 
   //////////////   useQuery to get data of planets asynchronously by providing config (like: staleTime and cacheTime)  ////////////
 
-  const { data, status } = useQuery(
+  const {
+    isLoading,
+    isError,
+    error,
+    data,
+    isFetching,
+    status,
+    isPreviousData,
+  } = useQuery(
     ["planets", page],
     () => fetchPlanets(page),
+    { keepPreviousData: true },
     {
       staleTime: 0,
       cacheTime: 10,
@@ -30,18 +39,37 @@ const Planets = () => {
     <>
       <h2>Planets</h2>
 
-      <button onClick={() => setPage(1)}>Page 1</button>
+      {/* <button onClick={() => setPage(1)}>Page 1</button>
       <button onClick={() => setPage(2)}>Page 2</button>
-      <button onClick={() => setPage(3)}>Page 3</button>
+      <button onClick={() => setPage(3)}>Page 3</button> */}
 
       {status === "loading" ? (
         <div>loading....</div>
       ) : status === "error" ? (
         <div> Error fetching data</div>
       ) : status === "success" ? (
-        data.results.map((planet) => (
-          <Planet key={planet.name} planet={planet} />
-        ))
+        <div>
+          <button
+            onClick={() => setPage((old) => Math.min(old - 1, old))}
+            disabled={page == 1}
+          >
+            Previous
+          </button>
+          <span>{page}</span>
+          <button
+            onClick={() => {
+              if (!isPreviousData) {
+                setPage((old) => old + 1);
+              }
+            }}
+            disabled={!data.next}
+          >
+            Next
+          </button>
+          {data.results.map((planet) => (
+            <Planet key={planet.name} planet={planet} />
+          ))}
+        </div>
       ) : null}
     </>
   );
