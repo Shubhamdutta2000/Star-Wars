@@ -3,6 +3,8 @@ import { useQuery } from "react-query";
 
 import Planet from "./Planet";
 
+import Loader from "../Loader";
+
 ////////////  async function of fetching data of planets from api  //////////
 
 const fetchPlanets = async (page) => {
@@ -15,21 +17,11 @@ const Planets = () => {
 
   //////////////   useQuery to get data of planets asynchronously by providing config (like: staleTime and cacheTime)  ////////////
 
-  const {
-    isLoading,
-    isError,
-    error,
-    data,
-    isFetching,
-    status,
-    isPreviousData,
-  } = useQuery(
+  const { data, status, isPreviousData } = useQuery(
     ["planets", page],
     () => fetchPlanets(page),
     { keepPreviousData: true },
     {
-      staleTime: 0,
-      cacheTime: 10,
       onSuccess: () => console.log("Planets Data feched successfully"),
       onError: () => console.log("Error while fetching data of Planets"),
     }
@@ -39,33 +31,34 @@ const Planets = () => {
     <>
       <h2>Planets</h2>
 
-      {/* <button onClick={() => setPage(1)}>Page 1</button>
-      <button onClick={() => setPage(2)}>Page 2</button>
-      <button onClick={() => setPage(3)}>Page 3</button> */}
-
       {status === "loading" ? (
-        <div>loading....</div>
+        <Loader />
       ) : status === "error" ? (
         <div> Error fetching data</div>
       ) : status === "success" ? (
         <div>
-          <button
-            onClick={() => setPage((old) => Math.min(old - 1, old))}
-            disabled={page == 1}
-          >
-            Previous
-          </button>
-          <span>{page}</span>
-          <button
-            onClick={() => {
-              if (!isPreviousData) {
-                setPage((old) => old + 1);
-              }
-            }}
-            disabled={!data.next}
-          >
-            Next
-          </button>
+          <div className="pagination">
+            <button
+              className="pagination__prev"
+              onClick={() => setPage((old) => Math.min(old - 1, old))}
+              disabled={page == 1}
+            >
+              Previous
+            </button>
+            <span>{page}</span>
+            <button
+              className="pagination__next"
+              onClick={() => {
+                if (!isPreviousData) {
+                  setPage((old) => old + 1);
+                }
+              }}
+              disabled={!data.next}
+            >
+              Next
+            </button>
+          </div>
+
           {data.results.map((planet) => (
             <Planet key={planet.name} planet={planet} />
           ))}

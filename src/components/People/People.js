@@ -3,6 +3,8 @@ import { useQuery } from "react-query";
 
 import Person from "./Person";
 
+import Loader from "../Loader";
+
 ////////////  async function of fetching data of people from api  //////////
 
 const fetchPeople = async (page) => {
@@ -15,21 +17,11 @@ const People = () => {
 
   //////////////   useQuery to get data of people asynchronously by providing config (like: staleTime and cacheTime)  ////////////
 
-  const {
-    isLoading,
-    isError,
-    error,
-    data,
-    isFetching,
-    status,
-    isPreviousData,
-  } = useQuery(
+  const { data, status, isPreviousData } = useQuery(
     ["people", page],
     () => fetchPeople(page),
     { keepPreviousData: true },
     {
-      staleTime: 0,
-      cacheTime: 10,
       onSuccess: () => console.log("People Data feched successfully"),
       onError: () => console.log("Error while fetching data of People"),
     }
@@ -40,28 +32,32 @@ const People = () => {
       <h2>People</h2>
 
       {status === "loading" ? (
-        <div>loading....</div>
+        <Loader />
       ) : status === "error" ? (
         <div> Error fetching data</div>
       ) : status === "success" ? (
         <div>
-          <button
-            onClick={() => setPage((old) => Math.min(old - 1, old))}
-            disabled={page == 1}
-          >
-            Previous
-          </button>
-          <span>{page}</span>
-          <button
-            onClick={() => {
-              if (!isPreviousData) {
-                setPage((old) => old + 1);
-              }
-            }}
-            disabled={!data.next}
-          >
-            Next
-          </button>
+          <div className="pagination">
+            <button
+              className="pagination__left"
+              onClick={() => setPage((old) => Math.min(old - 1, old))}
+              disabled={page == 1}
+            >
+              Previous
+            </button>
+            <span>{page}</span>
+            <button
+              className="pagination__right"
+              onClick={() => {
+                if (!isPreviousData) {
+                  setPage((old) => old + 1);
+                }
+              }}
+              disabled={!data.next}
+            >
+              Next
+            </button>
+          </div>
           {data.results.map((person) => (
             <Person key={person.name} person={person} />
           ))}

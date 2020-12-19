@@ -1,9 +1,18 @@
+nav {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
 button {
   margin: 0 10px;
   background: transparent;
   border: 3px solid #ccc;
   border-radius: 20px;
-  padding: 10px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 24px;
+  padding-right: 24px;
+
   color: #ccc;
   font-size: 1.2em;
   cursor: pointer;
@@ -11,4 +20,9 @@ button {
 button:hover {
   color: rgb(243, 137, 51);
   border-color: rgb(251, 255, 43);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

@@ -1,13 +1,13 @@
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   background: rgb(36, 36, 37);
   color: rgb(212, 206, 206);
   text-align: center;
 }
 .App {
   width: 960px;
-  margin: 0 auto;
+  margin: 80px auto;
 }
 h1 {
   color: #ff9900;
@@ -16,4 +16,8 @@ h1 {
 }
 .content {
   text-align: left;
+}
+
+.footer {
+  padding-top: 48px;
 }

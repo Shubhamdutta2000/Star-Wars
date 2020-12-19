@@ -3,6 +3,8 @@ import { useQuery } from "react-query";
 
 import Film from "./Film";
 
+import Loader from "../Loader";
+
 ////////////  async function of fetching data of films from api  //////////
 
 const fetchFilms = async () => {
@@ -14,8 +16,6 @@ const Films = () => {
   //////////////   useQuery to get data of films asynchronously by providing config (like: staleTime and cacheTime)  ////////////
 
   const { data, status } = useQuery("films", fetchFilms, {
-    staleTime: 0,
-    cacheTime: 10,
     onSuccess: () => console.log("Films Data feched successfully"),
     onError: () => console.log("Error while fetching data of films"),
   });
@@ -25,7 +25,7 @@ const Films = () => {
       <h2>Films</h2>
 
       {status === "loading" ? (
-        <div>loading...</div>
+        <Loader />
       ) : status === "error" ? (
         <div> Error fetching data</div>
       ) : status === "success" ? (
