@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 
-import Planet from "./Planet";
+import Starship from "./Starship";
 
-////////////  async function of fetching data of planets from api  //////////
+////////////  async function of fetching data of starships from api  //////////
 
-const fetchPlanets = async (page) => {
-  const res = await fetch(`https://swapi.dev/api/planets/?page=${page}`);
+const fetchStarships = async (page) => {
+  const res = await fetch(`https://swapi.dev/api/starships/?page=${page}`);
   return res.json();
 };
 
-const Planets = () => {
+const Starships = () => {
   const [page, setPage] = useState(1);
 
-  //////////////   useQuery to get data of planets asynchronously by providing config (like: staleTime and cacheTime)  ////////////
+  //////////////   useQuery to get data of starships asynchronously by providing config (like: staleTime and cacheTime)  ////////////
 
   const {
     isLoading,
@@ -24,24 +24,20 @@ const Planets = () => {
     status,
     isPreviousData,
   } = useQuery(
-    ["planets", page],
-    () => fetchPlanets(page),
+    ["starships", page],
+    () => fetchStarships(page),
     { keepPreviousData: true },
     {
       staleTime: 0,
       cacheTime: 10,
-      onSuccess: () => console.log("Planets Data feched successfully"),
-      onError: () => console.log("Error while fetching data of Planets"),
+      onSuccess: () => console.log("Starships Data feched successfully"),
+      onError: () => console.log("Error while fetching data of Starships"),
     }
   );
 
   return (
     <>
-      <h2>Planets</h2>
-
-      {/* <button onClick={() => setPage(1)}>Page 1</button>
-      <button onClick={() => setPage(2)}>Page 2</button>
-      <button onClick={() => setPage(3)}>Page 3</button> */}
+      <h2>Starships</h2>
 
       {status === "loading" ? (
         <div>loading....</div>
@@ -66,8 +62,8 @@ const Planets = () => {
           >
             Next
           </button>
-          {data.results.map((planet) => (
-            <Planet key={planet.name} planet={planet} />
+          {data.results.map((starship) => (
+            <Starship key={starship.name} starship={starship} />
           ))}
         </div>
       ) : null}
@@ -75,4 +71,4 @@ const Planets = () => {
   );
 };
 
-export default Planets;
+export default Starships;

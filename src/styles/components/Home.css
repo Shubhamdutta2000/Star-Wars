@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: rgb(36, 36, 37);
+  color: rgb(212, 206, 206);
+  text-align: center;
+}
+.App {
+  width: 960px;
+  margin: 0 auto;
+}
+h1 {
+  color: #ff9900;
+  font-size: 4em;
+  letter-spacing: 2px;
+}
+.content {
+  text-align: left;
+}
