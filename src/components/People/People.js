@@ -41,7 +41,7 @@ const People = () => {
             <button
               className="pagination__left"
               onClick={() => setPage((old) => Math.min(old - 1, old))}
-              disabled={page == 1}
+              disabled={page === 1}
             >
               Previous
             </button>
