@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 
 import Film from "./Film";
@@ -6,7 +6,7 @@ import Film from "./Film";
 ////////////  async function of fetching data of films from api  //////////
 
 const fetchFilms = async () => {
-  const res = await fetch("https://swapi.dev/api/films/");
+  const res = await fetch(`https://swapi.dev/api/films/`);
   return res.json();
 };
 
@@ -23,6 +23,7 @@ const Films = () => {
   return (
     <>
       <h2>Films</h2>
+
       {status === "loading" ? (
         <div>loading...</div>
       ) : status === "error" ? (
