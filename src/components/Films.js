@@ -9,20 +9,23 @@ const fetchFilms = async () => {
 };
 
 const Films = () => {
-  const { data, status } = useQuery("films", fetchFilms);
-  console.log(data);
+  const { data, status } = useQuery("films", fetchFilms, {
+    staleTime: 0,
+    cacheTime: 10,
+    onSuccess: () => console.log("Films Data feched successfully"),
+    onError: () => console.log("Error while fetching data of films"),
+  });
 
   return (
     <>
       <h2>Films</h2>
-      {status == "loading" ? (
-        <div>loading</div>
-      ) : status == "error" ? (
+      {status === "loading" ? (
+        <div>loading...</div>
+      ) : status === "error" ? (
         <div> Error fetching data</div>
-      ) : status == "success" ? (
-        data.results.map((film) => <Film key={film.name} film={film} />)
+      ) : status === "success" ? (
+        data.results.map((film) => <Film key={film.title} film={film} />)
       ) : null}
-      );
     </>
   );
 };
